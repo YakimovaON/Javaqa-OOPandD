@@ -131,7 +131,7 @@ public class RadioTest {
         channel.setCurrentVolume(10);
         channel.increaseVolumeLess();
 
-        int expected = 0;
+        int expected = 10;
         int actual = channel.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
@@ -158,9 +158,40 @@ public class RadioTest {
     public void nextFirstVolume() {
         Radio channel = new Radio();
         channel.setCurrentVolume(0);
-        channel.increaseVolumeLess();
+        channel.increaseVolumeMore();
 
-        int expected = 1;
+        int expected = 0;
+        int actual = channel.getCurrentVolume();
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void nextVolume() {
+        Radio channel = new Radio();
+        channel.setCurrentVolume(9);
+        channel.increaseVolumeMore();
+
+        int expected = 10;
+        int actual = channel.getCurrentVolume();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void MoreMinVolume() {
+        Radio channel = new Radio();
+        channel.setCurrentVolume(1);
+        channel.increaseVolumeMore();
+
+        int expected = 2;
+        int actual = channel.getCurrentVolume();
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void MoreMaxVolume() {
+        Radio channel = new Radio();
+        channel.setCurrentVolume(3);
+        channel.increaseVolumeMore();
+
+        int expected = 4;
         int actual = channel.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
